@@ -1,0 +1,42 @@
+#staff-page {
+  header {
+    width: 100%;
+    height: $headerHeight;
+    background-color: $headerBgColour;
+    display: flex;
+    justify-content: center;
+  }
+
+  h1 {
+    margin: 0px;
+    color: $headerTextColour;
+    display: flex;
+    align-items: center;
+  }
+}
+
+#side-bar {
+  float: left;
+  width: 20%;
+  position: absolute;
+  left: 0;
+  background-color: $sidebarBgColour;
+  height: $sidebarHeight;
+  z-index: -1;
+  display: block;
+  padding: 25px;
+  box-sizing: border-box;
+
+  .material-icons {
+    position: relative;
+    top: 8px;
+    margin-right: 10px;
+    font-size: 35px;
+  }
+
+  ul {
+    li {
+      font-size: 25px;
+    }
+  }
+}

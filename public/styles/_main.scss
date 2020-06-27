@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap");
+
+body {
+  font-family: "Source Sans Pro", sans-serif;
+  background-color: $pageBackgroundColour;
+  font-size: 18px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  padding: 20px;
+}
+
+nav {
+  ul {
+    list-style: none;
+    padding: 0px;
+  }
+}
+
+a {
+  text-decoration: $noTextDecoration;
+
+  &:visited {
+    color: #000000;
+  }
+}

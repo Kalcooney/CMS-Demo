@@ -1,0 +1,16 @@
+// Colours
+// Body
+$pageBackgroundColour: #f2f2f2;
+$pageFontSize: 18px;
+
+// Header
+$headerBgColour: #0d47a1;
+$headerTextColour: #ffffff;
+$headerHeight: 100px;
+
+// Sidebar
+$sidebarBgColour: #ffffff;
+$sidebarHeight: calc(100vh - #{$headerHeight});
+
+// Links
+$noTextDecoration: none;
