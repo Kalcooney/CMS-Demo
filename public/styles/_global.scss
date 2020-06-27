@@ -1,4 +1,6 @@
 // Colours
+$white: #ffffff;
+
 // Body
 $pageBackgroundColour: #f2f2f2;
 $pageFontSize: 18px;
@@ -11,6 +13,10 @@ $headerHeight: 100px;
 // Sidebar
 $sidebarBgColour: #ffffff;
 $sidebarHeight: calc(100vh - #{$headerHeight});
+$sidebarWidth: 20%;
 
 // Links
 $noTextDecoration: none;
+
+// Misc
+$cardBackgroundColour: #ffffff;

@@ -13,6 +13,44 @@
     display: flex;
     align-items: center;
   }
+
+  .content {
+    position: relative;
+    left: $sidebarWidth;
+    display: block;
+    padding: 20px 50px;
+    box-sizing: border-box;
+    width: calc(100% - #{$sidebarWidth});
+  }
+
+  .list {
+    width: 100%;
+    background-color: $cardBackgroundColour;
+
+    tr:first-child {
+      text-align: left;
+      background-color: $headerBgColour;
+      color: $white;
+    }
+
+    th {
+      padding: 5px;
+    }
+
+    td {
+      border: 1px solid #000000;
+      padding: 5px;
+    }
+  }
+
+  .actions {
+    margin: 20px 0px;
+    font-weight: 700;
+
+    span {
+      margin-right: 20px;
+    }
+  }
 }
 
 #side-bar {
@@ -22,7 +60,6 @@
   left: 0;
   background-color: $sidebarBgColour;
   height: $sidebarHeight;
-  z-index: -1;
   display: block;
   padding: 25px;
   box-sizing: border-box;
@@ -37,6 +74,7 @@
   ul {
     li {
       font-size: 25px;
+      padding-bottom: 20px;
     }
   }
 }
