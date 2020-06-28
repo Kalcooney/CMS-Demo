@@ -11,7 +11,7 @@ date_default_timezone_set('NZ-CHAT');
 
 <!--Staff Content Section -->
 <div class="content">
-<h2>Good Day. Find options on the left-hand menu</h2>
+<h2>Welcome. Find options on the left-hand menu</h2>
 </div>
 
 <!-- Include Footer -->

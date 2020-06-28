@@ -25,4 +25,22 @@ function h($string="") {
     return htmlspecialchars($string);
 }
  
+// Handle 404 error
+function error_404() {
+    header($_SERVER["SERVER_PROTOCOL"]."404 Not Found");
+    exit;
+}
+
+// Handle 500 error
+function error_500() {
+    header($_SERVER["SERVER_PROTOCOL"]."500 Internal Server Error");
+    exit;
+}
+
+// Handle redirect
+function redirect_to($location) {
+    header("Location: ".$location);
+    exit;
+}
+
 ?>
