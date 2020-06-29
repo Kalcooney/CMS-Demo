@@ -1,4 +1,7 @@
 <?php
+// Set server timezone
+date_default_timezone_set('NZ-CHAT');
+
 if (!isset($page_title)) { $page_title = 'Staff Dashboard'; }
 ?>
 

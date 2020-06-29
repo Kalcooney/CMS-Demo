@@ -43,4 +43,14 @@ function redirect_to($location) {
     exit;
 }
 
+// Check if request is POST
+function is_post_request() {
+    return $_SERVER['REQUEST_METHOD'] == 'POST';
+}
+
+// Check if request is GET
+function is_get_request() {
+    return $_SERVER['REQUEST_METHOD'] == 'GET';
+}
+
 ?>

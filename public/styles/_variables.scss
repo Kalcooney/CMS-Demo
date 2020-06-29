@@ -18,5 +18,11 @@ $sidebarWidth: 20%;
 // Links
 $noTextDecoration: none;
 
+// Forms
+$formBackgroundColour: #ffffff;
+$formFontSize: 20px;
+$formButtonColour: #0d47a1;
+$formButtonHoverColour: darken($formButtonColour, 10%);
+
 // Misc
 $cardBackgroundColour: #ffffff;

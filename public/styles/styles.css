@@ -77,4 +77,46 @@ a {
     font-size: 25px;
     padding-bottom: 20px; }
 
+.dashboard-form {
+  padding: 50px;
+  background-color: #ffffff; }
+  .dashboard-form label {
+    margin-bottom: 5px; }
+  .dashboard-form input[name="visible"] {
+    display: inline-block;
+    width: unset;
+    margin-left: 20px;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 3px; }
+  .dashboard-form input,
+  .dashboard-form select {
+    margin-bottom: 30px;
+    width: 25%;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border: 1px solid #000000;
+    box-sizing: border-box; }
+  .dashboard-form select {
+    cursor: pointer; }
+  .dashboard-form label,
+  .dashboard-form input,
+  .dashboard-form select,
+  .dashboard-form option {
+    display: block;
+    font-size: 20px; }
+  .dashboard-form button {
+    display: block;
+    font-size: 20px;
+    padding: 15px;
+    border: none;
+    background-color: #0d47a1;
+    color: #ffffff; }
+    .dashboard-form button:hover {
+      background-color: #093272;
+      cursor: pointer; }
+  .dashboard-form .no-break {
+    display: inline-block; }
+
 /*# sourceMappingURL=styles.css.map */

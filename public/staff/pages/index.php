@@ -22,7 +22,7 @@ date_default_timezone_set('NZ-CHAT');
 
     <div class="actions">
     <span>Actions: </span>
-      <a class="action" href="">Create New Page</a>
+      <a class="action" href="<?php print url_for("/staff/pages/new.php");?>">Create New Page</a>
     </div>
 
   	<table class="list">
@@ -43,7 +43,7 @@ date_default_timezone_set('NZ-CHAT');
           <td><?php print $page['visible'] == 1 ? 'true' : 'false'; ?></td>
     	    <td><?php print h($page['page_name']); ?></td>
           <td><a class="action" href="<?php print url_for("/staff/pages/show.php?id=".h(u($page['id'])."&name=".u($page['page_name'])));?>">View</a></td>
-          <td><a class="action" href="">Edit</a></td>
+          <td><a class="action" href="<?php print url_for("/staff/pages/edit.php?id=".h(u($page['id'])));?>">Edit</a></td>
           <td><a class="action" href="">Delete</a></td>
     	  </tr>
       <?php } ?>

@@ -1,7 +1,5 @@
 <?php 
 require_once("../../../private/initialize.php");
-
-date_default_timezone_set('NZ-CHAT');
 ?>
 
 <?php
@@ -22,7 +20,7 @@ date_default_timezone_set('NZ-CHAT');
 
     <div class="actions">
     <span>Actions: </span>
-      <a class="action" href="">Create New Subject</a>
+      <a class="action" href="<?php print url_for("/staff/subjects/new.php");?>">Create New Subject</a>
     </div>
 
   	<table class="list">
@@ -43,7 +41,7 @@ date_default_timezone_set('NZ-CHAT');
           <td><?php print $subject['visible'] == 1 ? 'true' : 'false'; ?></td>
     	    <td><?php print h($subject['menu_name']); ?></td>
           <td><a class="action" href="<?php print url_for("/staff/subjects/show.php?id=".h(u($subject['id'])));?>">View</a></td>
-          <td><a class="action" href="">Edit</a></td>
+          <td><a class="action" href="<?php print url_for("/staff/subjects/edit.php?id=".h(u($subject['id'])));?>">Edit</a></td>
           <td><a class="action" href="">Delete</a></td>
     	  </tr>
       <?php } ?>
