@@ -6,22 +6,34 @@ if (!isset($_GET['id'])) {
 }
 
 $id = $_GET['id'];
-$menuName = "";
-$position = "";
-$visible = "";
+
+// Fetch data
+$subject = find_subject($id);
 
 if(is_post_request()) {
 
-    // Handle form values sent by new.php
+    // Handle submitted form values
+    $subject = [];
+    $subject['subject_name'] = isset($_POST['menuName']) ? $_POST['menuName'] : "";
+    $subject['position'] = isset($_POST['position']) ? $_POST['position'] : "";
+    $subject['visible'] = isset($_POST['visible']) ? "1" : "0";
 
-    $menuName = isset($_POST['menuName']) ? $_POST['menuName'] : "";
-    $position = isset($_POST['position']) ? $_POST['position'] : "";
-    $visible = isset($_POST['visible']) ? $_POST['visible'] : "";
+    // Update subject in database
+    $updateSubject = update_subject($id, $subject['subject_name'], $subject['position'], $subject['visible']);
 
-    print "Form parameters<br>";
-    print "Menu Name: ".$menuName."<br>";
-    print "Position: ".$position."<br>";
-    print "Visible: ".$visible."<br>";
+    if($updateSubject) {
+      redirect_to(url_for('/staff/subjects/show.php?id='.$id));
+    }
+
+} else {
+  // Fetch data
+  $subject = find_subject($id);
+
+  // Find out how many subjects there are
+  $subjectSet = find_all_subjects();
+  $subjectCount = mysqli_num_rows($subjectSet);
+  mysqli_free_result($subjectSet);
+
 }
 ?>
 
@@ -30,18 +42,27 @@ if(is_post_request()) {
 
 <div class="content">
   <h2>Edit Subject</h2>
+  <a class="back-button" href="<?php print url_for('/staff/subjects/index.php'); ?>"><span class="material-icons">arrow_back</span>Back to List</a>
 
   <form class="dashboard-form" action="<?php print url_for('/staff/subjects/edit.php?id='.h(u($id)));?>" method="post">
     <label for="menu-name">Menu Name: </label>
-    <input type="text" name="menuName" value="<?php print $menuName; ?>" />
+    <input type="text" name="menuName" value="<?php print h($subject['subject_name']); ?>" />
     <label for="position">Position: </label>
     <select name="position">
-      <option selected="selected">Please select an option...</option>
-      <option value="1">1</option>
+      <?php
+        for($i=1; $i <= $subjectCount; $i++) {
+          print "<option value='".$i."' ";
+          // if position of subject is the same as i that option field is the default one
+          if($subject["position"] == $i) {
+            print "selected ";
+          }
+          print ">".$i."</option>";
+        }
+      ?>
     </select>
     <label class="no-break" for="visible">Visible: </label>
-    <input type="checkbox" name="visible" />
-    <button type="submit" name="editSubject">Edit Subject</button>
+    <input type="checkbox" name="visible" <?php if ($subject['visible'] == "1") { print "checked"; } ?> />
+    <button type="submit" name="editSubject">Save Changes</button>
   </form>
 </div>
 

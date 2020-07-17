@@ -11,14 +11,19 @@ body {
 footer {
   position: absolute;
   bottom: 0;
-  padding: 20px; }
+  padding: 20px;
+  left: 20%; }
 
 nav ul {
   list-style: none;
   padding: 0px; }
 
 a {
-  text-decoration: none; }
+  text-decoration: none;
+  color: #000000;
+  cursor: pointer; }
+  a:hover {
+    color: #0d47a1; }
   a:visited {
     color: #000000; }
 
@@ -57,6 +62,24 @@ a {
   font-weight: 700; }
   #staff-page .actions span {
     margin-right: 20px; }
+#staff-page .subject .entries,
+#staff-page .page .entries {
+  padding: 50px;
+  background-color: #ffffff; }
+  #staff-page .subject .entries .label,
+  #staff-page .page .entries .label {
+    text-align: left;
+    display: inline-block;
+    width: 200px;
+    margin-bottom: 5px; }
+#staff-page a.back-button {
+  font-size: 20px;
+  margin-bottom: 30px;
+  display: block; }
+  #staff-page a.back-button span {
+    margin-right: 5px;
+    position: relative;
+    top: 6px; }
 
 #side-bar {
   float: left;
@@ -118,5 +141,9 @@ a {
       cursor: pointer; }
   .dashboard-form .no-break {
     display: inline-block; }
+  .dashboard-form strong.item {
+    margin-bottom: 20px;
+    display: block;
+    font-size: 25px; }
 
 /*# sourceMappingURL=styles.css.map */

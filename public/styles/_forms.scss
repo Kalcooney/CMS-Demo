@@ -56,4 +56,12 @@
   .no-break {
     display: inline-block;
   }
+
+  strong {
+    &.item {
+      margin-bottom: 20px;
+      display: block;
+      font-size: 25px;
+    }
+  }
 }

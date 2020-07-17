@@ -51,6 +51,35 @@
       margin-right: 20px;
     }
   }
+
+  .subject,
+  .page {
+    .entries {
+      padding: 50px;
+      background-color: $white;
+
+      .label {
+        text-align: left;
+        display: inline-block;
+        width: 200px;
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  a {
+    &.back-button {
+      font-size: 20px;
+      margin-bottom: 30px;
+      display: block;
+
+      span {
+        margin-right: 5px;
+        position: relative;
+        top: 6px;
+      }
+    }
+  }
 }
 
 #side-bar {

@@ -1,24 +1,17 @@
 <?php 
 require_once("../../../private/initialize.php");
 
-$id = $_GET['id'];
-$menuName = "";
-$position = "";
-$visible = "";
+// Find out how many pages there are
+$pageSet = find_all_pages();
+$pageCount = mysqli_num_rows($pageSet) + 1;
+mysqli_free_result($pageSet);
 
-if(is_post_request()) {
+// Get all subjects
+$subjectSet = find_all_subjects();
 
-    // Handle form values sent by new.php
+$page = [];
+$page["position"] = $pageCount;
 
-    $menuName = isset($_POST['menuName']) ? $_POST['menuName'] : "";
-    $position = isset($_POST['position']) ? $_POST['position'] : "";
-    $visible = isset($_POST['visible']) ? $_POST['visible'] : "";
-
-    print "Form parameters<br>";
-    print "Menu Name: ".$menuName."<br>";
-    print "Position: ".$position."<br>";
-    print "Visible: ".$visible."<br>";
-}
 ?>
 
 <?php $page_title = 'Create Page'; ?>
@@ -26,19 +19,35 @@ if(is_post_request()) {
 
 <div class="content">
   <h2>Create Page</h2>
-
-  <form class="dashboard-form" action="<?php print url_for('/staff/pages/new.php');?>" method="post">
-    <label for="menu-name">Menu Name: </label>
-    <input type="text" name="menuName" value="<?php print $menuName; ?>"/>
+  <a class="back-button" href="<?php print url_for('/staff/pages/index.php'); ?>"><span class="material-icons">arrow_back</span>Back to List</a>
+  
+  <form class="dashboard-form" action="<?php print url_for('/staff/pages/create.php');?>" method="post">
+    <label for="page-name">Page Name: </label>
+    <input type="text" name="pageName" />
+    <label for="subject-name">Subject Name: </label>
+    <select name="subjectName">
+      <option selected>Please select a subject...</option>
+      <?php
+          while ($subject = $subjectSet->fetch_assoc()) {
+            print "<option value='".$subject['id']."'>".$subject['subject_name']."</option>";
+          }
+      ?>
+    </select>
     <label for="position">Position: </label>
     <select name="position">
-      <option selected="selected">Please select an option...</option>
-      <option <?php if($position == "1") { print "selected='selected'"; } ?> value="1">1</option>
+      <?php
+          for($i=1; $i <= $pageCount; $i++) {
+            print "<option value='".$i."' ";
+            // if position of subject is the same as i that option field is the default one
+            if($page["position"] == $i) {
+              print "selected ";
+            }
+            print ">".$i."</option>";
+          }
+        ?>
     </select>
     <label class="no-break" for="visible">Visible: </label>
-    <input type="checkbox" name="visible" <?php if($visible == "on") { print "checked"; } ?>/>
-    <button type="submit" name="createSubject">Create Subject</button>
+    <input type="checkbox" name="visible" />
+    <button type="submit" name="createPage">Create Page</button>
   </form>
 </div>
-
-<?php include(SHARED_PATH . '/staff_footer.php'); ?>

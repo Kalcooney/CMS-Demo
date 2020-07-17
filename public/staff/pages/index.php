@@ -1,16 +1,10 @@
-<?php 
-require_once("../../../private/initialize.php");
-
-date_default_timezone_set('NZ-CHAT');
-?>
+<?php require_once("../../../private/initialize.php"); ?>
 
 <?php
-  $pages = [
-    ['id' => '1', 'position' => '1', 'visible' => '1', 'page_name' => 'Home'],
-    ['id' => '2', 'position' => '2', 'visible' => '1', 'page_name' => 'Services'],
-    ['id' => '3', 'position' => '3', 'visible' => '1', 'page_name' => 'About Us'],
-    ['id' => '4', 'position' => '4', 'visible' => '1', 'page_name' => 'Contact Us'],
-  ];
+
+// Get all subjects
+$page_set = find_all_pages();
+
 ?>
 
 <?php $page_title = 'Pages'; ?>
@@ -28,26 +22,30 @@ date_default_timezone_set('NZ-CHAT');
   	<table class="list">
   	  <tr>
         <th>ID</th>
+        <th>Subject Name</th>
         <th>Position</th>
         <th>Visible</th>
-  	    <th>Name</th>
+  	    <th>Page Name</th>
   	    <th>&nbsp;</th>
   	    <th>&nbsp;</th>
         <th>&nbsp;</th>
   	  </tr>
 
-      <?php foreach($pages as $page) { ?>
+      <?php while($page = mysqli_fetch_assoc($page_set)) { ?>
         <tr>
           <td><?php print h($page['id']); ?></td>
+          <td><?php print h($page['subject_name']); ?></td>
           <td><?php print h($page['position']); ?></td>
           <td><?php print $page['visible'] == 1 ? 'true' : 'false'; ?></td>
     	    <td><?php print h($page['page_name']); ?></td>
-          <td><a class="action" href="<?php print url_for("/staff/pages/show.php?id=".h(u($page['id'])."&name=".u($page['page_name'])));?>">View</a></td>
+          <td><a class="action" href="<?php print url_for("/staff/pages/show.php?id=".h(u($page['id'])));?>">View</a></td>
           <td><a class="action" href="<?php print url_for("/staff/pages/edit.php?id=".h(u($page['id'])));?>">Edit</a></td>
-          <td><a class="action" href="">Delete</a></td>
+          <td><a class="action" href="<?php print url_for("/staff/pages/delete.php?id=".h(u($page['id'])));?>">Delete</a></td>
     	  </tr>
       <?php } ?>
   	</table>
+
+    <?php mysqli_free_result($page_set); ?>
 
   </div>
 
