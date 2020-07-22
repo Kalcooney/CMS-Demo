@@ -15,6 +15,11 @@ function db_disconnect($connection) {
     if (isset($connection)) { mysqli_close($connection); }
 }
 
+// Escape string to prevent SQL injection
+function db_escape($connection, $string) {
+    return mysqli_real_escape_string($connection, $string);
+}
+
 // Confirm database is connected. If not, produce an error message
 function confirm_db_connect() {
     if(mysqli_connect_errno()) {

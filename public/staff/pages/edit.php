@@ -15,27 +15,29 @@ if(is_post_request()) {
     $page['subject'] = isset($_POST['subjectName']) ? $_POST['subjectName'] : "";
     $page['position'] = isset($_POST['position']) ? $_POST['position'] : "";
     $page['visible'] = isset($_POST['visible']) ? "1" : "0";
+    $page['id'] = $id;
 
     // Update page in database
-    $updatePage = update_page($id, $page['subject'], $page['page_name'], $page['position'], $page['visible']);
+    $updatePage = update_page($page);
 
-    if($updatePage) {
+    if($updatePage === true) {
       redirect_to(url_for('/staff/pages/show.php?id='.$id));
+    } else {
+      $errors = $updatePage;
     }
 
 } else {
   // Fetch data
   $page = find_page($id);
-
-  // Find out how many pages there are
-  $pageSet = find_all_pages();
-  $pageCount = mysqli_num_rows($pageSet);
-  mysqli_free_result($pageSet);
-
-  // Get all subjects
-  $subjectSet = find_all_subjects();
-
 }
+
+ // Find out how many pages there are
+ $pageSet = find_all_pages();
+ $pageCount = mysqli_num_rows($pageSet);
+ mysqli_free_result($pageSet);
+
+ // Get all subjects
+ $subjectSet = find_all_subjects();
 ?>
 
 <?php $page_title = 'Edit Page'; ?>
@@ -45,12 +47,14 @@ if(is_post_request()) {
   <h2>Edit Page</h2>
   <a class="back-button" href="<?php print url_for('/staff/pages/index.php'); ?>"><span class="material-icons">arrow_back</span>Back to List</a>
 
+  <?php echo display_errors($errors); ?>
+
   <form class="dashboard-form" action="<?php print url_for('/staff/pages/edit.php?id='.h(u($id)));?>" method="post">
     <label for="page-name">Page Name: </label>
     <input type="text" name="pageName" value="<?php print h($page['page_name']); ?>" />
     <label for="subject-name">Subject Name: </label>
     <select name="subjectName">
-      <option selected>Please select a subject...</option>
+      <option selected value="default">Please select a subject...</option>
       <?php
           while ($subject = $subjectSet->fetch_assoc()) {
             print "<option value='".$subject['id']."'";

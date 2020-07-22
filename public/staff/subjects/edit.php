@@ -17,24 +17,26 @@ if(is_post_request()) {
     $subject['subject_name'] = isset($_POST['menuName']) ? $_POST['menuName'] : "";
     $subject['position'] = isset($_POST['position']) ? $_POST['position'] : "";
     $subject['visible'] = isset($_POST['visible']) ? "1" : "0";
+    $subject["id"] = $id;
 
     // Update subject in database
-    $updateSubject = update_subject($id, $subject['subject_name'], $subject['position'], $subject['visible']);
+    $updateSubject = update_subject($subject);
 
-    if($updateSubject) {
+    if($updateSubject === true) {
       redirect_to(url_for('/staff/subjects/show.php?id='.$id));
+    } else {
+      $errors = $updateSubject;
     }
 
 } else {
   // Fetch data
   $subject = find_subject($id);
-
-  // Find out how many subjects there are
-  $subjectSet = find_all_subjects();
-  $subjectCount = mysqli_num_rows($subjectSet);
-  mysqli_free_result($subjectSet);
-
 }
+
+// Find out how many subjects there are
+$subjectSet = find_all_subjects();
+$subjectCount = mysqli_num_rows($subjectSet);
+mysqli_free_result($subjectSet);
 ?>
 
 <?php $page_title = 'Edit Subject'; ?>
@@ -43,6 +45,9 @@ if(is_post_request()) {
 <div class="content">
   <h2>Edit Subject</h2>
   <a class="back-button" href="<?php print url_for('/staff/subjects/index.php'); ?>"><span class="material-icons">arrow_back</span>Back to List</a>
+
+  <!-- Display any errors with the form output -->
+  <?php echo display_errors($errors); ?>
 
   <form class="dashboard-form" action="<?php print url_for('/staff/subjects/edit.php?id='.h(u($id)));?>" method="post">
     <label for="menu-name">Menu Name: </label>
